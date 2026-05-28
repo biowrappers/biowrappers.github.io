@@ -5,7 +5,7 @@ BioWrappers is a collection of lightweight wrappers around common bioinformatics
 This is a minimal Jekyll site for BioWrappers with a Pico CSS base layer and a small set of core pages:
 
 - Home
-- Projects
+- Tools
 - Blog
 - About
 

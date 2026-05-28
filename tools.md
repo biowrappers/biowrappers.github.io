@@ -1,7 +1,7 @@
 ---
-title: Projects
+title: Tools
 description: Current project areas for BioWrappers.
-permalink: /projects/
+permalink: /tools/
 ---
 
 Current project areas:
