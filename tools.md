@@ -1,11 +1,6 @@
 ---
 title: Tools
-description: Current project areas for BioWrappers.
+description: Python wrappers for common bioinformatics APIs and resources.
 permalink: /tools/
+layout: tools
 ---
-
-Current project areas:
-
-- Wrappers for common APIs and command-line tools
-- Reproducible analysis workflows
-- Small supporting packages and templates

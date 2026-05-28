@@ -1,0 +1,42 @@
+---
+layout: default
+---
+
+<article class="content-page tools-page">
+  <header>
+    <hgroup>
+      <h1>{{ page.title }}</h1>
+      {% if page.description %}
+        <p>{{ page.description }}</p>
+      {% endif %}
+    </hgroup>
+  </header>
+
+  {% if site.data.tools.size > 0 %}
+    <div class="tool-grid">
+      {% for tool in site.data.tools %}
+        <article class="tool-card">
+          <h2>{{ tool.name }}</h2>
+          <p>{{ tool.description }}</p>
+          <p role="group" class="tool-links">
+            <a href="{{ tool.github }}" role="button">
+              <i class="fa-brands fa-github fa-fw" aria-hidden="true"></i>GitHub
+            </a>
+            {% if tool.docs %}
+              <a href="{{ tool.docs }}" role="button">
+                <i class="fa-solid fa-book fa-fw" aria-hidden="true"></i>Docs
+              </a>
+            {% endif %}
+            {% if tool.pypi %}
+              <a href="{{ tool.pypi }}" role="button">
+                <i class="fa-solid fa-box fa-fw" aria-hidden="true"></i>PyPI
+              </a>
+            {% endif %}
+          </p>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No tools listed yet.</p>
+  {% endif %}
+</article>

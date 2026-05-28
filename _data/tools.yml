@@ -1,0 +1,9 @@
+- name: harmonizome
+  description: A BioWrappers tool for working with the Harmonizome API.
+  github: https://github.com/biowrappers/harmonizome
+  docs: https://biowrappers.github.io/harmonizome/
+
+- name: pyDAVID
+  description: A BioWrappers Python interface for working with DAVID.
+  github: https://github.com/biowrappers/pyDAVID
+  docs: https://github.com/biowrappers/pyDAVID#readme

@@ -13,18 +13,22 @@ layout: default
   </header>
 
   {% if site.posts.size > 0 %}
-    {% for post in site.posts %}
-      <section class="post-preview">
-        <hgroup>
-          <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-          <p><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time></p>
-        </hgroup>
-        {% if post.excerpt %}
-          <p>{{ post.excerpt | strip_html }}</p>
-        {% endif %}
-      </section>
-      {% unless forloop.last %}<hr>{% endunless %}
-    {% endfor %}
+    <div class="post-list">
+      {% for post in site.posts %}
+        <article class="post-preview">
+          <hgroup>
+            <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+            <p><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time></p>
+          </hgroup>
+          {% if post.excerpt %}
+            <div class="post-excerpt">{{ post.excerpt }}</div>
+          {% endif %}
+          <p class="post-read-more">
+            <a href="{{ post.url | relative_url }}" role="button">Read more</a>
+          </p>
+        </article>
+      {% endfor %}
+    </div>
   {% else %}
     <p>No posts published yet.</p>
   {% endif %}

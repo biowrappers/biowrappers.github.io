@@ -2,16 +2,28 @@
   --pico-font-family: "Open Sans", system-ui, -apple-system, sans-serif;
   --ncbi-primary: #0071bc;
   --ncbi-primary-darker: #205493;
+  --ncbi-primary-darkest: #112e51;
+  --ncbi-primary-light: #e1f3f8;
   --ncbi-gray-dark: #323a45;
   --ncbi-white: #ffffff;
+  --btn-fill-bg: var(--ncbi-primary-darkest);
+  --btn-fill-border: var(--ncbi-primary-darkest);
+  --btn-fill-color: var(--ncbi-white);
+  --btn-fill-hover-bg: var(--ncbi-primary-light);
+  --btn-fill-hover-border: var(--ncbi-primary);
+  --btn-fill-hover-color: var(--ncbi-primary-darkest);
   --pico-background-color: var(--ncbi-white);
   --pico-color: var(--ncbi-gray-dark);
   --pico-primary: var(--ncbi-primary);
-  --pico-primary-hover: var(--ncbi-primary-darker);
+  --pico-primary-background: var(--btn-fill-bg);
+  --pico-primary-border: var(--btn-fill-border);
+  --pico-primary-hover: var(--btn-fill-hover-color);
+  --pico-primary-hover-background: var(--btn-fill-hover-bg);
+  --pico-primary-hover-border: var(--btn-fill-hover-border);
   --pico-primary-focus: rgba(0, 113, 188, 0.2);
-  --pico-primary-inverse: var(--ncbi-white);
-  --pico-muted-color: #5b616b;
-  --pico-border-color: rgba(32, 84, 147, 0.2);
+  --pico-primary-inverse: var(--btn-fill-color);
+  --pico-muted-color: #464c57;
+  --pico-border-color: rgba(17, 46, 81, 0.22);
   --pico-card-background-color: var(--pico-background-color);
   --pico-card-sectioning-background-color: var(--pico-background-color);
   --pico-card-border-color: var(--pico-border-color);
@@ -33,10 +45,20 @@
   :root {
     --pico-background-color: #0f1720;
     --pico-color: #e6edf3;
+    --btn-fill-bg: var(--ncbi-primary-darker);
+    --btn-fill-border: var(--ncbi-primary-darker);
+    --btn-fill-color: #e6edf3;
+    --btn-fill-hover-bg: var(--ncbi-primary-light);
+    --btn-fill-hover-border: var(--ncbi-primary);
+    --btn-fill-hover-color: var(--ncbi-primary-darkest);
     --pico-primary: #5dade2;
-    --pico-primary-hover: #8ac5eb;
+    --pico-primary-background: var(--btn-fill-bg);
+    --pico-primary-border: var(--btn-fill-border);
+    --pico-primary-hover: var(--btn-fill-hover-color);
+    --pico-primary-hover-background: var(--btn-fill-hover-bg);
+    --pico-primary-hover-border: var(--btn-fill-hover-border);
     --pico-primary-focus: rgba(93, 173, 226, 0.25);
-    --pico-primary-inverse: #081018;
+    --pico-primary-inverse: var(--btn-fill-color);
     --pico-muted-color: #b6c2cf;
     --pico-border-color: rgba(138, 197, 235, 0.24);
     --pico-card-background-color: var(--pico-background-color);
@@ -52,6 +74,25 @@
       var(--pico-primary) 18%,
       var(--pico-background-color)
     );
+    --pico-muted-color: #c2c9d4;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  article.content-page > header hgroup p {
+    color: var(--pico-color);
+  }
+
+  article.tool-card {
+    border-color: rgba(138, 197, 235, 0.28);
+  }
+
+  article.tool-card h2 {
+    color: #f0f4f8;
+  }
+
+  article.tool-card p:not(.tool-links) {
+    color: var(--pico-color);
   }
 }
 
@@ -155,6 +196,50 @@ section {
   width: auto;
 }
 
+/* Buttons: dark fill → light hover with dark text (NCBI palette) */
+:is(a, button)[role="button"] {
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+:is(a, button)[role="button"]:not(.outline) {
+  background-color: var(--btn-fill-bg);
+  border-color: var(--btn-fill-border);
+  color: var(--btn-fill-color);
+}
+
+:is(a, button)[role="button"]:not(.outline):hover {
+  background-color: var(--btn-fill-hover-bg);
+  border-color: var(--btn-fill-hover-border);
+  color: var(--btn-fill-hover-color);
+}
+
+:is(a, button)[role="button"].outline {
+  background-color: transparent;
+  border-color: var(--btn-fill-bg);
+  color: var(--btn-fill-bg);
+}
+
+:is(a, button)[role="button"].outline:hover {
+  background-color: var(--btn-fill-hover-bg);
+  border-color: var(--btn-fill-hover-border);
+  color: var(--btn-fill-hover-color);
+}
+
+:is(a, button)[role="button"].outline.secondary {
+  border-color: var(--pico-border-color);
+  color: var(--pico-color);
+}
+
+:is(a, button)[role="button"].outline.secondary:hover {
+  background-color: var(--btn-fill-hover-bg);
+  border-color: var(--btn-fill-hover-border);
+  color: var(--btn-fill-hover-color);
+}
+
 article.content-page {
   background: transparent;
   border-radius: 0;
@@ -175,23 +260,127 @@ article.content-page > header hgroup {
   margin-bottom: 1.5rem;
 }
 
-.post-preview h2 {
+article.content-page > header hgroup p {
+  color: var(--ncbi-gray-dark);
+  opacity: 1;
+}
+
+.post-list {
+  display: grid;
+  gap: 1.25rem;
+}
+
+article.post-preview {
+  border: 1px solid var(--pico-border-color);
+  border-radius: var(--pico-border-radius);
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+}
+
+article.post-preview hgroup {
+  margin-bottom: 0.75rem;
+}
+
+article.post-preview h2 {
   font-size: 1.25rem;
   margin-bottom: 0.25rem;
 }
 
-.post-preview h2 a {
+article.post-preview h2 a {
   color: var(--pico-color);
   text-decoration: none;
 }
 
-.post-preview h2 a:hover {
+article.post-preview h2 a:hover {
   color: var(--pico-primary);
   text-decoration: underline;
 }
 
-.post-preview + hr {
-  margin: 1.5rem 0;
+article.post-preview time {
+  color: var(--pico-muted-color);
+  font-size: 0.9rem;
+}
+
+.post-excerpt {
+  color: var(--pico-color);
+  margin-bottom: 0;
+}
+
+.post-read-more {
+  margin-bottom: 0;
+  margin-top: 1rem;
+}
+
+.post-read-more a[role="button"] {
+  background-color: var(--btn-fill-bg);
+  border-color: var(--btn-fill-border);
+  color: var(--btn-fill-color);
+  font-weight: 600;
+  margin-bottom: 0;
+  width: auto;
+}
+
+.post-read-more a[role="button"]:hover {
+  background-color: var(--btn-fill-hover-bg);
+  border-color: var(--btn-fill-hover-border);
+  color: var(--btn-fill-hover-color);
+}
+
+article.content-page.tools-page {
+  max-width: 52rem;
+}
+
+.tool-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+}
+
+article.tool-card {
+  border: 1px solid rgba(17, 46, 81, 0.18);
+  border-radius: var(--pico-border-radius);
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+}
+
+article.tool-card h2 {
+  color: var(--ncbi-primary-darkest);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+article.tool-card p:not(.tool-links) {
+  color: var(--ncbi-gray-dark);
+  flex: 1;
+  line-height: 1.55;
+  margin-bottom: 1rem;
+}
+
+.tool-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0;
+}
+
+.tool-links a[role="button"] {
+  align-items: center;
+  background-color: var(--btn-fill-bg);
+  border-color: var(--btn-fill-border);
+  color: var(--btn-fill-color);
+  display: inline-flex;
+  font-weight: 600;
+  gap: 0.35rem;
+  margin-bottom: 0;
+  width: auto;
+}
+
+.tool-links a[role="button"]:hover {
+  background-color: var(--btn-fill-hover-bg);
+  border-color: var(--btn-fill-hover-border);
+  color: var(--btn-fill-hover-color);
 }
 
 .site-footer {
