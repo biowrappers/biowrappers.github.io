@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <title>
+      {% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
+    >
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.1.1/css/pico.min.css"
+      integrity="sha384-L1dWfspMTHU/ApYnFiMz2QID/PlP1xCW9visvBdbEkOLkSSWsP6ZJWhPw6apiXxU"
+      crossorigin="anonymous"
+    >
+    <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-nRgPTkuX86pH8yjPJUAFuASXQSSl2/bBUiNV47vSYpKFxHJhbcrGnmlYpYJMeD7a="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    >
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <nav class="container">
+        <ul>
+          <li>
+            <a class="brand-mark" href="{{ '/' | relative_url }}">
+              <img
+                class="brand-logo"
+                src="{{ '/navlogo.png' | relative_url }}"
+                alt=""
+              >
+              <strong>{{ site.title }}</strong>
+            </a>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>
+              <i class="fa-solid fa-house fa-fw" aria-hidden="true"></i>home
+            </a>
+          </li>
+          <li>
+            <a href="{{ '/projects/' | relative_url }}"{% if page.url == '/projects/' %} aria-current="page"{% endif %}>
+              <i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i>projects
+            </a>
+          </li>
+          <li>
+            <a href="{{ '/blog/' | relative_url }}"{% if page.url == '/blog/' or page.layout == 'post' %} aria-current="page"{% endif %}>
+              <i class="fa-solid fa-newspaper fa-fw" aria-hidden="true"></i>blog
+            </a>
+          </li>
+          <li>
+            <a href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>
+              <i class="fa-solid fa-circle-info fa-fw" aria-hidden="true"></i>about
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main" class="container">
+      {{ content }}
+    </main>
+
+    <footer class="container site-footer">
+      <small>
+        &copy; 2018 BioWrappers
+        <span aria-hidden="true">·</span>
+        <a href="{{ site.repository_url }}">
+          <i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+          GitHub
+        </a>
+        <span aria-hidden="true">·</span>
+        <a href="{{ '/LICENSE' | relative_url }}">
+          <i class="fa-solid fa-scale-balanced fa-lg" aria-hidden="true"></i>
+          License
+        </a>
+      </small>
+    </footer>
+  </body>
+</html>

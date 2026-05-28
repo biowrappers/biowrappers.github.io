@@ -1,0 +1,18 @@
+title: BioWrappers
+description: BioWrappers is a collection of lightweight wrappers around common bioinformatics APIs and tools, designed to make them easier to use in reproducible workflows.
+url: "https://biowrappers.github.io"
+baseurl: ""
+repository_url: "https://github.com/biowrappers/biowrappers.github.io"
+issues_url: "https://github.com/biowrappers/biowrappers.github.io/issues"
+markdown: kramdown
+permalink: /blog/:title/
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: content
+
+collections:
+  posts:
+    output: true

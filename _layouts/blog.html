@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+<article class="content-page">
+  <header>
+    <hgroup>
+      <h1>{{ page.title }}</h1>
+      {% if page.description %}
+        <p>{{ page.description }}</p>
+      {% endif %}
+    </hgroup>
+  </header>
+
+  {% if site.posts.size > 0 %}
+    {% for post in site.posts %}
+      <section class="post-preview">
+        <hgroup>
+          <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+          <p><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time></p>
+        </hgroup>
+        {% if post.excerpt %}
+          <p>{{ post.excerpt | strip_html }}</p>
+        {% endif %}
+      </section>
+      {% unless forloop.last %}<hr>{% endunless %}
+    {% endfor %}
+  {% else %}
+    <p>No posts published yet.</p>
+  {% endif %}
+</article>
