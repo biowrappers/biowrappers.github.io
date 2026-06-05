@@ -1,0 +1,70 @@
+name: Bug Report
+description: Report a problem with the site or build workflow
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the bug clearly and concisely
+      placeholder: What is broken?
+    validations:
+      required: true
+
+  - type: input
+    id: page_url
+    attributes:
+      label: Affected page URL
+      description: If this is a site issue, link the affected page
+      placeholder: https://biowrappers.github.io/...
+    validations:
+      required: false
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: List the steps that reproduce the issue
+      placeholder: |
+        1. Go to ...
+        2. Click ...
+        3. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      placeholder: What should have happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      placeholder: What happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include browser, OS, or local build context as needed
+      placeholder: |
+        - Browser:
+        - OS:
+        - Local command, if relevant:
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Screenshots, logs, or other useful details
+    validations:
+      required: false

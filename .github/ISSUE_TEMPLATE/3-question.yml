@@ -1,0 +1,21 @@
+name: Question
+description: Ask a question about the site, content, or workflow
+title: "[Question]: "
+labels: ["question"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What would you like to know?
+      placeholder: Ask your question here
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Add any relevant details, URLs, or examples
+    validations:
+      required: false
