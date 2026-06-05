@@ -1,11 +1,11 @@
 ---
 title: About
-description: Why BioWrappers exists and what this site is for.
+description: Why BioWrappers exists.
 permalink: /about/
 ---
 
-The goal is to reduce setup friction without hiding the assumptions that matter for reproducibility.
+BioWrappers simply means wrappers around bioinformatics tools.
 
-This site is intentionally minimal, with pages for `Tools`, `Blog`, and `About`.
+It was inspired by tools like Biopython and mygene.
 
-Development and discussion live on [GitHub]({{ site.repository_url }}), and bugs or feature requests can be opened in the [issue tracker]({{ site.issues_url }}).
+The ultimate goal is for tools to be easily used by anyone who can do a little bit of programming. 

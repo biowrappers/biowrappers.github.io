@@ -1,13 +1,66 @@
 <!doctype html>
 <html lang="en">
   <head>
+    {% assign page_title_text = page.title | default: site.title %}
+    {% assign page_description_source = page.description | default: page.excerpt | default: site.description %}
+    {% assign page_description_text = page_description_source | markdownify | strip_html | strip_newlines | normalize_whitespace %}
+    {% assign page_description_text = page_description_text | truncate: 160 %}
+    {% assign canonical_url = page.url | absolute_url %}
+    {% assign social_image_url = '/biowrappers_logo.png' | absolute_url %}
+    {% assign social_type = "website" %}
+    {% if page.date %}
+      {% assign social_type = "article" %}
+    {% endif %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="description" content="{{ page.description | default: site.description }}">
+    <meta name="description" content="{{ page_description_text }}">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:type" content="{{ social_type }}">
+    <meta property="og:title" content="{{ page_title_text }}">
+    <meta property="og:description" content="{{ page_description_text }}">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:image" content="{{ social_image_url }}">
+    <meta property="og:image:alt" content="{{ page_title_text }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page_title_text }}">
+    <meta name="twitter:description" content="{{ page_description_text }}">
+    <meta name="twitter:image" content="{{ social_image_url }}">
+    {% if page.date %}
+      <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+    {% endif %}
     <title>
       {% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}
     </title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "{% if page.date %}BlogPosting{% else %}WebPage{% endif %}",
+        "headline": {{ page_title_text | jsonify }},
+        "description": {{ page_description_text | jsonify }},
+        "url": {{ canonical_url | jsonify }},
+        "image": {{ social_image_url | jsonify }},
+        {% if page.date %}
+        "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+        {% endif %}
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": {{ site.title | jsonify }},
+          "url": {{ site.url | jsonify }}
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": {{ site.title | jsonify }},
+          "url": {{ site.url | jsonify }},
+          "logo": {
+            "@type": "ImageObject",
+            "url": {{ social_image_url | jsonify }}
+          }
+        }
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,7 +77,6 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-      integrity="sha512-nRgPTkuX86pH8yjPJUAFuASXQSSl2/bBUiNV47vSYpKFxHJhbcrGnmlYpYJMeD7a="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     >
@@ -76,16 +128,16 @@
 
     <footer class="container site-footer">
       <small>
-        &copy; 2018 BioWrappers
+        &copy; 2018-2026 BioWrappers
         <span aria-hidden="true">·</span>
         <a href="{{ site.repository_url }}">
           <i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-          GitHub
+          <span class="footer-link-label">GitHub</span>
         </a>
         <span aria-hidden="true">·</span>
         <a href="{{ '/LICENSE' | relative_url }}">
           <i class="fa-solid fa-scale-balanced fa-lg" aria-hidden="true"></i>
-          License
+          <span class="footer-link-label">License</span>
         </a>
       </small>
     </footer>

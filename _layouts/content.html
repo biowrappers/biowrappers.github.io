@@ -2,6 +2,11 @@
 layout: default
 ---
 
+{% assign is_post = false %}
+{% if page.date %}
+  {% assign is_post = true %}
+{% endif %}
+
 <article class="content-page">
   <header>
     <hgroup>
@@ -10,9 +15,47 @@ layout: default
         <p>{{ page.description }}</p>
       {% endif %}
     </hgroup>
-    {% if page.date %}
-      <p><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time></p>
+    {% if is_post %}
+      {% assign page_word_count = content | strip_html | number_of_words %}
+      {% assign page_read_time = page_word_count | plus: 179 | divided_by: 180 %}
+      {% if page_read_time < 1 %}
+        {% assign page_read_time = 1 %}
+      {% endif %}
+      <p class="post-meta">
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
+        <span aria-hidden="true">·</span>
+        <span>{{ page_read_time }} min read</span>
+      </p>
     {% endif %}
   </header>
   {{ content }}
+  {% if is_post %}
+    {% assign page_canonical_url = page.url | absolute_url %}
+    {% assign share_title = page.title | uri_escape %}
+    {% assign share_url = page_canonical_url | uri_escape %}
+    {% assign github_edit_url = site.repository_url | append: "/edit/main/" | append: page.path %}
+    <footer class="post-actions" aria-label="Post actions">
+      <div class="post-share-links">
+        <span class="post-actions-label">Share</span>
+        <a class="post-action-button" href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url }}" target="_blank" rel="noopener noreferrer" role="button">
+          <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+          LinkedIn
+        </a>
+        <a class="post-action-button" href="https://twitter.com/intent/tweet?url={{ share_url }}&text={{ share_title }}" target="_blank" rel="noopener noreferrer" role="button">
+          <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+          X
+        </a>
+        <a class="post-action-button" href="https://bsky.app/intent/compose?text={{ share_title }}%20{{ share_url }}" target="_blank" rel="noopener noreferrer" role="button">
+          <i class="fa-brands fa-bluesky" aria-hidden="true"></i>
+          Bluesky
+        </a>
+      </div>
+      <p class="post-edit-link">
+        <a class="post-action-button outline secondary" href="{{ github_edit_url }}" role="button">
+          <i class="fa-brands fa-github" aria-hidden="true"></i>
+          Edit on GitHub
+        </a>
+      </p>
+    </footer>
+  {% endif %}
 </article>

@@ -15,10 +15,19 @@ layout: default
   {% if site.posts.size > 0 %}
     <div class="post-list">
       {% for post in site.posts %}
+        {% assign post_word_count = post.content | strip_html | number_of_words %}
+        {% assign post_read_time = post_word_count | plus: 179 | divided_by: 180 %}
+        {% if post_read_time < 1 %}
+          {% assign post_read_time = 1 %}
+        {% endif %}
         <article class="post-preview">
           <hgroup>
             <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-            <p><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time></p>
+            <p class="post-meta">
+              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time>
+              <span aria-hidden="true">·</span>
+              <span>{{ post_read_time }} min read</span>
+            </p>
           </hgroup>
           {% if post.excerpt %}
             <div class="post-excerpt">{{ post.excerpt }}</div>
